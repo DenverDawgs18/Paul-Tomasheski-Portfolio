@@ -18,6 +18,28 @@ npm run build
 npm run preview
 ```
 
+## Deploy — GitHub Pages
+
+Pushed to `main`, this repo builds and deploys automatically via
+`.github/workflows/deploy.yml`. One-time repo setup:
+
+1. **Settings → Pages → Build and deployment → Source: GitHub Actions.**
+2. Push to `main` (or run the workflow manually from **Actions →
+   Deploy to GitHub Pages → Run workflow**).
+3. The site publishes to
+   `https://denverdawgs18.github.io/paul-tomasheski-portfolio/`.
+
+`vite.config.js` sets `base: '/paul-tomasheski-portfolio/'` for
+production builds so asset URLs resolve correctly under the project-site
+subpath. Dev keeps `/` so `npm run dev` is unchanged.
+
+If you move to a custom domain or a user site
+(`denverdawgs18.github.io`), override the base at build time:
+
+```bash
+VITE_BASE=/ npm run build
+```
+
 ## Notes
 
 Placeholders / assumptions to double-check are marked with `PLACEHOLDER:`
