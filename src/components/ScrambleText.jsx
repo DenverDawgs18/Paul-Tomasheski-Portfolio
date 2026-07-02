@@ -27,7 +27,11 @@ export default function ScrambleText({
   const inView = useInView(ref, { threshold: 0.4 });
   const play = startOnVisible ? inView : true;
   const [display, setDisplay] = useState(() =>
-    prefersReducedMotion() ? text : scrambleAll(text)
+    // On the server (prerender) emit the real text so the static HTML is
+    // clean; in the browser this is unchanged (scrambled until it resolves).
+    typeof window === 'undefined' || prefersReducedMotion()
+      ? text
+      : scrambleAll(text)
   );
   const doneRef = useRef(false);
 

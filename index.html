@@ -1,13 +1,46 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="no-js">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Enable JS-only entrance animations only when JS is present, so no-JS
+         clients still see fully visible (un-hidden) content. Runs before paint. -->
+    <script>
+      document.documentElement.classList.remove('no-js');
+      document.documentElement.classList.add('js');
+    </script>
     <meta name="theme-color" content="#0d0e10" />
-    <meta name="description" content="Paul Tomasheski · self-taught developer building AI-first tools." />
-    <meta property="og:title" content="Paul Tomasheski · Developer" />
-    <meta property="og:description" content="Self-taught developer building AI-first tools: MailMind, Chronicle, and independent LLM research." />
+
+    <title>Paul Tomasheski · Developer</title>
+    <meta
+      name="description"
+      content="Self-taught developer building AI-first tools for everyday work. Creator of MailMind and Chronicle, and independent LLM researcher."
+    />
+    <link rel="canonical" href="https://denverdawgs18.github.io/Paul-Tomasheski-Portfolio/" />
+
+    <!-- Open Graph -->
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Paul Tomasheski" />
+    <meta property="og:title" content="Paul Tomasheski · Developer" />
+    <meta
+      property="og:description"
+      content="Self-taught developer building AI-first tools for everyday work. Creator of MailMind and Chronicle, and independent LLM researcher."
+    />
+    <meta property="og:url" content="https://denverdawgs18.github.io/Paul-Tomasheski-Portfolio/" />
+    <meta property="og:image" content="https://denverdawgs18.github.io/Paul-Tomasheski-Portfolio/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Paul Tomasheski, self-taught developer building AI-first tools." />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Paul Tomasheski · Developer" />
+    <meta
+      name="twitter:description"
+      content="Self-taught developer building AI-first tools. Creator of MailMind and Chronicle, and independent LLM researcher."
+    />
+    <meta name="twitter:image" content="https://denverdawgs18.github.io/Paul-Tomasheski-Portfolio/og.png" />
+
     <link
       rel="icon"
       href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230d0e10'/%3E%3Ctext x='32' y='42' font-family='monospace' font-size='28' fill='%23e6b872' text-anchor='middle'%3E%24_%3C/text%3E%3C/svg%3E"
@@ -18,7 +51,6 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
     />
-    <title>Paul Tomasheski</title>
   </head>
   <body>
     <div id="root"></div>

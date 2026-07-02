@@ -17,7 +17,9 @@ export default function CountUp({
 }) {
   const ref = useRef(null);
   const inView = useInView(ref, { threshold: 0.5 });
-  const [value, setValue] = useState(0);
+  // On the server (prerender) render the final value so the static HTML
+  // shows real numbers; in the browser this is unchanged (counts up from 0).
+  const [value, setValue] = useState(() => (typeof window === 'undefined' ? to : 0));
 
   useEffect(() => {
     if (!inView) return undefined;

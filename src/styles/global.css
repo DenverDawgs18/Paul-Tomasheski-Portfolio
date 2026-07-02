@@ -183,8 +183,13 @@ p {
   height: 1px;
   background: var(--border);
   margin-left: 8px;
-  transform: scaleX(0);
   transform-origin: left;
+}
+
+/* Hidden initial state applies only when JS can reveal it (see index.html's
+   no-js/js swap); no-JS clients get the fully drawn rule. */
+.js .section-rule {
+  transform: scaleX(0);
   transition: transform 1000ms var(--ease) 250ms;
 }
 
@@ -195,12 +200,16 @@ p {
 /* ---------- Scroll reveal ---------- */
 
 .reveal {
-  opacity: 0;
-  transform: translateY(26px);
   transition:
     opacity 800ms var(--ease),
     transform 800ms var(--ease);
   transition-delay: var(--reveal-delay, 0ms);
+}
+
+/* Only hide-before-reveal when JS is present to animate it back in. */
+.js .reveal {
+  opacity: 0;
+  transform: translateY(26px);
 }
 
 .reveal.is-visible {
@@ -944,10 +953,13 @@ p {
   color: var(--text-muted);
   padding-left: 14px;
   position: relative;
-  opacity: 0;
-  transform: translateX(-8px);
   transition: opacity 500ms var(--ease), transform 500ms var(--ease);
   transition-delay: calc(250ms + var(--i, 0) * 60ms);
+}
+
+.js .coursework-list li {
+  opacity: 0;
+  transform: translateX(-8px);
 }
 
 .reveal.is-visible .coursework-list li {
