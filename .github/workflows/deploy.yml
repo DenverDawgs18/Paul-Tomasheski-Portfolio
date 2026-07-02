@@ -29,7 +29,11 @@ jobs:
 
       - run: npm ci
 
+      # Derive base path from the actual repo name so case matches Pages
+      # (paths are case-sensitive) and a rename doesn't require a code change.
       - run: npm run build
+        env:
+          VITE_BASE: /${{ github.event.repository.name }}/
 
       - uses: actions/configure-pages@v5
 

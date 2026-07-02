@@ -27,11 +27,11 @@ Pushed to `main`, this repo builds and deploys automatically via
 2. Push to `main` (or run the workflow manually from **Actions →
    Deploy to GitHub Pages → Run workflow**).
 3. The site publishes to
-   `https://denverdawgs18.github.io/paul-tomasheski-portfolio/`.
+   `https://denverdawgs18.github.io/Paul-Tomasheski-Portfolio/`.
 
-`vite.config.js` sets `base: '/paul-tomasheski-portfolio/'` for
-production builds so asset URLs resolve correctly under the project-site
-subpath. Dev keeps `/` so `npm run dev` is unchanged.
+The workflow passes the repo name as `VITE_BASE` at build time, so asset
+URLs match the Pages subpath exactly (paths are case-sensitive). Dev
+keeps `/` so `npm run dev` is unchanged.
 
 If you move to a custom domain or a user site
 (`denverdawgs18.github.io`), override the base at build time:
