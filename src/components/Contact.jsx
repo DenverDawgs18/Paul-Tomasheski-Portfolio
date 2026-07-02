@@ -1,8 +1,15 @@
+import { useState } from 'react';
+import Reveal from './Reveal.jsx';
+import SectionHeader from './SectionHeader.jsx';
+
+const EMAIL = 'pautomas55@gmail.com';
+
 const links = [
   {
     label: 'Email',
-    value: 'pautomas55@gmail.com',
-    href: 'mailto:pautomas55@gmail.com',
+    value: EMAIL,
+    href: `mailto:${EMAIL}`,
+    copy: true,
   },
   {
     label: 'GitHub',
@@ -17,34 +24,54 @@ const links = [
 ];
 
 export default function Contact() {
+  const [copied, setCopied] = useState(false);
+
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(EMAIL);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1600);
+    } catch {
+      // Clipboard unavailable (e.g. insecure context) — mailto link still works.
+    }
+  };
+
   return (
     <section id="contact" className="section">
       <div className="container">
-        <div className="section-header">
-          <span className="section-index">04</span>
-          <h2 className="section-title">Contact</h2>
-          <span className="section-rule" aria-hidden="true" />
-        </div>
+        <SectionHeader index="04" title="Contact" />
 
-        <p className="contact-lede">
+        <Reveal as="p" className="contact-lede">
           Working on something interesting, or want to talk about email triage,
           VBT, or LLM fine-tuning? My inbox is open.
-        </p>
+        </Reveal>
 
         <ul className="contact-links">
-          {links.map((l) => {
+          {links.map((l, i) => {
             const external = l.href.startsWith('http');
             return (
-              <li key={l.label}>
+              <Reveal as="li" key={l.label} delay={i * 90}>
                 <a
                   href={l.href}
-                  {...(external ? { target: '_blank', rel: 'noreferrer noopener' } : {})}
+                  {...(external
+                    ? { target: '_blank', rel: 'noreferrer noopener' }
+                    : {})}
                 >
                   <span className="contact-label">{l.label}</span>
                   <span className="contact-value">{l.value}</span>
                   <span className="contact-arrow" aria-hidden="true">→</span>
                 </a>
-              </li>
+                {l.copy && (
+                  <button
+                    type="button"
+                    className={`copy-btn${copied ? ' is-copied' : ''}`}
+                    onClick={copyEmail}
+                    aria-label="Copy email address"
+                  >
+                    {copied ? 'copied ✓' : 'copy'}
+                  </button>
+                )}
+              </Reveal>
             );
           })}
         </ul>

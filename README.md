@@ -43,7 +43,13 @@ VITE_BASE=/ npm run build
 ## Notes
 
 Placeholders / assumptions to double-check are marked with `PLACEHOLDER:`
-comments in the source. As of v1:
+comments in the source:
 
 - `src/components/Work.jsx` — Chronicle's stack is a placeholder mirroring
   MailMind's. Update once confirmed.
+
+All motion (scroll reveals, text scramble, count-up metrics, cursor
+spotlights) is hand-rolled — no animation libraries — and collapses to
+static rendering under `prefers-reduced-motion`. The footer's `rev`
+badge is the deployed commit hash, injected at build time by
+`vite.config.js`.

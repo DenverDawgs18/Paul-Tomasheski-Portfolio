@@ -1,3 +1,5 @@
+import useSpotlight from '../hooks/useSpotlight.js';
+
 function Badge({ variant, children }) {
   const cls =
     variant === 'live' ? 'badge badge-live'
@@ -12,6 +14,7 @@ function Badge({ variant, children }) {
 }
 
 export default function ProjectCard({
+  index,
   title,
   oneLiner,
   description,
@@ -19,8 +22,17 @@ export default function ProjectCard({
   link,
   status,
 }) {
+  const spotlight = useSpotlight();
+
   return (
-    <article className="card">
+    <article
+      className="card"
+      ref={spotlight.ref}
+      onPointerMove={spotlight.onPointerMove}
+    >
+      {index && (
+        <span className="card-index" aria-hidden="true">{index}</span>
+      )}
       <div className="card-head">
         <h3 className="card-title">
           {link ? (

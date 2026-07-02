@@ -1,4 +1,6 @@
 import ProjectCard from './ProjectCard.jsx';
+import Reveal from './Reveal.jsx';
+import SectionHeader from './SectionHeader.jsx';
 
 const projects = [
   {
@@ -27,25 +29,26 @@ export default function Work() {
   return (
     <section id="work" className="section">
       <div className="container">
-        <div className="section-header">
-          <span className="section-index">01</span>
-          <h2 className="section-title">Work</h2>
-          <span className="section-rule" aria-hidden="true" />
-        </div>
+        <SectionHeader index="01" title="Work" />
 
         <div className="work-grid">
-          {projects.map((p) => (
-            <ProjectCard key={p.title} {...p} />
+          {projects.map((p, i) => (
+            <Reveal key={p.title} delay={i * 110}>
+              <ProjectCard index={`00${i + 1}`} {...p} />
+            </Reveal>
           ))}
 
-          <article className="card card-mini">
-            <h3 className="card-title">Freelance web development</h3>
-            <p className="card-body">
-              Ran a small web development business in high school —
-              built sites for local clients and generated four figures in revenue
-              before college.
-            </p>
-          </article>
+          <Reveal delay={projects.length * 110}>
+            <article className="card card-mini">
+              <span className="card-index" aria-hidden="true">003</span>
+              <h3 className="card-title">Freelance web development</h3>
+              <p className="card-body">
+                Ran a small web development business in high school —
+                built sites for local clients and generated four figures in
+                revenue before college.
+              </p>
+            </article>
+          </Reveal>
         </div>
       </div>
     </section>

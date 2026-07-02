@@ -1,3 +1,6 @@
+import Reveal from './Reveal.jsx';
+import SectionHeader from './SectionHeader.jsx';
+
 const coursework = [
   'Calculus I–III',
   'Ordinary Differential Equations',
@@ -11,14 +14,10 @@ export default function About() {
   return (
     <section id="about" className="section">
       <div className="container">
-        <div className="section-header">
-          <span className="section-index">03</span>
-          <h2 className="section-title">About</h2>
-          <span className="section-rule" aria-hidden="true" />
-        </div>
+        <SectionHeader index="03" title="About" />
 
         <div className="about-grid">
-          <div className="about-body">
+          <Reveal className="about-body">
             <p>
               I'm a <strong>self-taught developer</strong> who worked through
               The Odin Project's full curriculum end-to-end, then kept going.
@@ -30,16 +29,16 @@ export default function About() {
               I'd want in a formal program — most of it completed while still
               in high school. I also volunteer with <strong>Club 40</strong>.
             </p>
-          </div>
+          </Reveal>
 
-          <div className="coursework">
+          <Reveal className="coursework" delay={140}>
             <div className="coursework-title">Coursework completed</div>
             <ul className="coursework-list">
-              {coursework.map((c) => (
-                <li key={c}>{c}</li>
+              {coursework.map((c, i) => (
+                <li key={c} style={{ '--i': i }}>{c}</li>
               ))}
             </ul>
-          </div>
+          </Reveal>
         </div>
       </div>
     </section>
