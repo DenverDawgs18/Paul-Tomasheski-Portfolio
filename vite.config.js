@@ -15,7 +15,7 @@ function commitHash() {
 }
 
 // Served from https://<user>.github.io/Paul-Tomasheski-Portfolio/ on Pages.
-// GitHub Pages paths are case-sensitive — must match the repo name exactly.
+// GitHub Pages paths are case-sensitive, so this must match the repo name exactly.
 // The workflow sets VITE_BASE from the actual repo name at build time so a
 // rename can't drift this out of sync. Dev keeps `/`.
 export default defineConfig(({ command }) => ({

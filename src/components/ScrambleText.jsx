@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import useInView from '../hooks/useInView.js';
 import { prefersReducedMotion } from '../lib/motion.js';
 
-const GLYPHS = '!<>-_\\/[]{}—=+*^?#$%&';
+const GLYPHS = '!<>-_\\/[]{}=+*^?#$%&';
 
 const randomGlyph = () => GLYPHS[(Math.random() * GLYPHS.length) | 0];
 

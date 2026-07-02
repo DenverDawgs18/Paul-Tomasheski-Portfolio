@@ -62,7 +62,7 @@ export default function Nav() {
     <header className={`nav ${scrolled ? 'is-scrolled' : ''}`}>
       <span ref={barRef} className="nav-progress" aria-hidden="true" />
       <div className="container nav-inner">
-        <a href="#top" className="nav-brand" aria-label="Paul Tomasheski — home">
+        <a href="#top" className="nav-brand" aria-label="Paul Tomasheski, home">
           <span className="nav-brand-mark">$</span>
           <span className="nav-brand-name">paul-tomasheski</span>
           <span className="brand-cursor" aria-hidden="true" />

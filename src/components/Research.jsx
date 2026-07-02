@@ -31,8 +31,8 @@ export default function Research() {
                 I hand-labeled a novel dataset of <strong>1,500 emails</strong> drawn
                 from the Enron corpus and fine-tuned an LLM to
                 <strong> jointly classify and summarize action items in a single pass</strong>.
-                On realistic inbox data — a mix of actionable and non-actionable
-                messages — the model beats traditional multi-step LSTM pipelines
+                On realistic inbox data, a mix of actionable and non-actionable
+                messages, the model beats traditional multi-step LSTM pipelines
                 across the metrics that matter for real users.
               </p>
             </div>
@@ -46,9 +46,11 @@ export default function Research() {
               </div>
               <div className="metric" role="listitem">
                 <span className="metric-value">
-                  <CountUp to={0.76} format={(v) => v.toFixed(2)} />
+                  {/* PLACEHOLDER: confirm the exact ROUGE-L score from the paper.
+                      0.44 is a stand-in so Paul can drop in the real number. */}
+                  <CountUp to={0.44} format={(v) => v.toFixed(2)} />
                 </span>
-                <span className="metric-label">F1 · classification</span>
+                <span className="metric-label">ROUGE-L · summarization</span>
               </div>
               <div className="metric" role="listitem">
                 <ScrambleText

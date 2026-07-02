@@ -32,7 +32,7 @@ export default function Contact() {
       setCopied(true);
       setTimeout(() => setCopied(false), 1600);
     } catch {
-      // Clipboard unavailable (e.g. insecure context) — mailto link still works.
+      // Clipboard unavailable (e.g. insecure context); mailto link still works.
     }
   };
 
@@ -42,8 +42,9 @@ export default function Contact() {
         <SectionHeader index="04" title="Contact" />
 
         <Reveal as="p" className="contact-lede">
-          Working on something interesting, or want to talk about email triage,
-          VBT, or LLM fine-tuning? My inbox is open.
+          If you want to talk math or AI, dig into something niche in one of my
+          areas, hire me to build something, or just compare notes, my inbox is
+          open.
         </Reveal>
 
         <ul className="contact-links">

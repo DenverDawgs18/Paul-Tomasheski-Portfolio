@@ -4,6 +4,7 @@ function Badge({ variant, children }) {
   const cls =
     variant === 'live' ? 'badge badge-live'
     : variant === 'shipped' ? 'badge badge-shipped'
+    : variant === 'open' ? 'badge badge-open'
     : 'badge';
   return (
     <span className={cls}>
@@ -20,6 +21,7 @@ export default function ProjectCard({
   description,
   stack,
   link,
+  linkLabel = 'visit site',
   status,
 }) {
   const spotlight = useSpotlight();
@@ -60,7 +62,7 @@ export default function ProjectCard({
             target="_blank"
             rel="noreferrer noopener"
           >
-            <span>visit site</span>
+            <span>{linkLabel}</span>
             <svg
               className="card-link-arrow"
               width="12"
