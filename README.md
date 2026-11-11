@@ -1,6 +1,36 @@
 # Paul Tomasheski · Portfolio
 
-Personal portfolio site. React + Vite, plain CSS, single page.
+Personal portfolio site. React + Vite, plain CSS.
+
+## The idea
+
+The whole site is **one paragraph**. Underlined phrases unfold their own
+text inline, nested inside each other, so the page is about 50 words
+collapsed and about 340 fully unfolded. It is an implementation of Ted
+Nelson's StretchText (1967): hypertext that grows in place instead of
+linking away to another page.
+
+- **Every reading is a URL.** Open folds are mirrored into the hash
+  (`#software+mailmind+paper`), so the version a reader shares is the
+  version the recipient sees. `#everything` unfolds it all. Old section
+  anchors (`#work`, `#research`, `#about`, `#contact`) map onto the
+  matching folds.
+- **The page measures itself.** The bottom bar shows how long the page is
+  right now versus how long it could be, and the tab title tracks it.
+  "Read on" unfolds the next phrase in reading order.
+- **Print** renders the paragraph fully unfolded, with link URLs inline.
+
+### Where things live
+
+- `src/components/Paragraph.jsx`: all of the copy. Each `<Fold>` has to
+  read grammatically open or closed, in any combination, so expansions are
+  written as parentheticals and appositives.
+- `src/folds.jsx`: fold state, URL sync, and the `<Fold>` component. Terms
+  are `<span role="button">`, not `<button>`, because browsers lay buttons
+  out as atomic boxes that cannot wrap across lines.
+- `src/components/Instrument.jsx`: the self-measuring control bar.
+- `src/styles/global.css` (paper, type, folds) and `src/styles/chrome.css`
+  (control bar, colophon, print).
 
 ## Develop
 
@@ -30,18 +60,16 @@ the built `dist/index.html`. The deployed HTML therefore contains the real
 DOM and accurate `<head>` meta before any JS runs, which is what crawlers,
 link-preview bots (Slack, LinkedIn, iMessage), and no-JS clients read.
 
+- **Every word ships as HTML.** Closed folds render with the `hidden`
+  attribute, so the prerendered page carries all ~340 words for crawlers.
 - **Not hydrated.** `main.jsx` still `createRoot().render()`s on the
   client, so the static markup is a snapshot for machines that the
-  interactive app replaces for humans. This is deliberate: it avoids any
-  hydration-mismatch risk from the time/random-based animation state.
+  interactive app replaces for humans. Fold state is read from the URL
+  hash on the client only.
 - **No headless browser.** Prerendering is a second, tiny Vite (SSR) pass,
   so CI needs no extra system deps, and the deploy workflow is unchanged.
-- `ScrambleText` / `CountUp` render their final text/number on the server
-  (guarded by `typeof window === 'undefined'`); client behavior is
-  unchanged.
-- No-JS clients: an inline `no-js` → `js` swap in `index.html` gates the
-  scroll-reveal hiding, so without JS the content is fully visible rather
-  than stuck at `opacity: 0`.
+- No-JS clients: an inline `no-js` → `js` swap in `index.html` lets
+  `global.css` show every fold unfolded when nothing can open them.
 
 ### Preview a production build locally
 
@@ -103,13 +131,12 @@ VITE_BASE=/ npm run build
 Placeholders / assumptions to double-check are marked with `PLACEHOLDER:`
 comments in the source:
 
-- `src/components/Work.jsx`: Chronicle's stack, and the Freelance card's
-  stack, are placeholders. Update once confirmed.
-- `src/components/Research.jsx`: the ROUGE-L value (0.44) is a placeholder;
-  drop in the real score from the paper.
+- `src/components/Paragraph.jsx`: the ROUGE-L value (0.44) is a
+  placeholder; drop in the real score from the paper. Chronicle's stack is
+  unconfirmed, so it is left out of the copy until it is.
 
-All motion (scroll reveals, text scramble, count-up metrics, cursor
-spotlights) is hand-rolled, with no animation libraries, and collapses to
-static rendering under `prefers-reduced-motion`. The footer's `rev`
-badge is the deployed commit hash, injected at build time by
-`vite.config.js`.
+Motion is CSS only (the highlighter sweep on unfold, the entrance fades)
+and collapses under `prefers-reduced-motion`. The colophon's `rev` is the
+deployed commit hash, injected at build time by `vite.config.js`.
+`public/og.png` is rendered from the opening sentence; regenerate it if the
+first line changes.

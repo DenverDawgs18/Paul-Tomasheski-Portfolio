@@ -2,14 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App.jsx';
 import './styles/global.css';
+import './styles/chrome.css';
 
-// Calling card for anyone who opens devtools.
-const mono = 'font-family:ui-monospace,monospace;font-size:12px;';
+// A note for anyone who opens devtools.
 console.info(
-  '%c$ whoami\n%cPaul Tomasheski · self-taught developer building AI-first tools.\n%c> pautomas55@gmail.com · github.com/DenverDawgs18',
-  `${mono}color:#e6b872;`,
-  `${mono}color:#e8e8e4;`,
-  `${mono}color:#8a8d94;`
+  '%c¶%c This page is one paragraph. Add #everything to the address to unfold all of it at once, or just write to pautomas55@gmail.com.',
+  'font:24px Georgia,serif;color:#c63a1c;',
+  'font:13px Georgia,serif;color:inherit;'
 );
 
 ReactDOM.createRoot(document.getElementById('root')).render(

@@ -1,23 +1,25 @@
-import Nav from './components/Nav.jsx';
-import Hero from './components/Hero.jsx';
-import Work from './components/Work.jsx';
-import Research from './components/Research.jsx';
-import About from './components/About.jsx';
-import Contact from './components/Contact.jsx';
-import Footer from './components/Footer.jsx';
+import { FoldProvider } from './folds.jsx';
+import Paragraph from './components/Paragraph.jsx';
+import Instrument from './components/Instrument.jsx';
+import Colophon from './components/Colophon.jsx';
 
 export default function App() {
   return (
-    <>
-      <Nav />
-      <main>
-        <Hero />
-        <Work />
-        <Research />
-        <About />
-        <Contact />
-      </main>
-      <Footer />
-    </>
+    <FoldProvider>
+      <div className="sheet">
+        <header className="masthead">
+          <span className="masthead-mark" aria-hidden="true">¶</span>
+          <p className="masthead-hint">
+            Underlined phrases unfold in place. This page is as long as you
+            want it to be.
+          </p>
+        </header>
+        <main>
+          <Paragraph />
+        </main>
+        <Colophon />
+      </div>
+      <Instrument />
+    </FoldProvider>
   );
 }

@@ -3,18 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- Enable JS-only entrance animations only when JS is present, so no-JS
-         clients still see fully visible (un-hidden) content. Runs before paint. -->
+    <!-- Folds can only open with JS. Without it, the .no-js rule in
+         global.css shows the whole paragraph unfolded. Runs before paint. -->
     <script>
       document.documentElement.classList.remove('no-js');
       document.documentElement.classList.add('js');
     </script>
-    <meta name="theme-color" content="#0d0e10" />
+    <meta name="theme-color" content="#f3efe6" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#141311" media="(prefers-color-scheme: dark)" />
 
     <title>Paul Tomasheski · Developer</title>
     <meta
       name="description"
-      content="Self-taught developer building AI-first tools for everyday work. Creator of MailMind and Chronicle, and independent LLM researcher."
+      content="Self-taught developer building MailMind, Chronicle, the FM Standards Checker, and StoryBook. This whole site is one paragraph that unfolds as you read."
     />
     <link rel="canonical" href="https://denverdawgs18.github.io/Paul-Tomasheski-Portfolio/" />
 
@@ -24,7 +25,7 @@
     <meta property="og:title" content="Paul Tomasheski · Developer" />
     <meta
       property="og:description"
-      content="Self-taught developer building AI-first tools for everyday work. Creator of MailMind and Chronicle, and independent LLM researcher."
+      content="Self-taught developer building MailMind, Chronicle, the FM Standards Checker, and StoryBook. This whole site is one paragraph that unfolds as you read."
     />
     <meta property="og:url" content="https://denverdawgs18.github.io/Paul-Tomasheski-Portfolio/" />
     <meta property="og:image" content="https://denverdawgs18.github.io/Paul-Tomasheski-Portfolio/og.png" />
@@ -37,19 +38,19 @@
     <meta name="twitter:title" content="Paul Tomasheski · Developer" />
     <meta
       name="twitter:description"
-      content="Self-taught developer building AI-first tools. Creator of MailMind and Chronicle, and independent LLM researcher."
+      content="Self-taught developer building MailMind, Chronicle, the FM Standards Checker, and StoryBook. This whole site is one paragraph that unfolds as you read."
     />
     <meta name="twitter:image" content="https://denverdawgs18.github.io/Paul-Tomasheski-Portfolio/og.png" />
 
     <link
       rel="icon"
-      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230d0e10'/%3E%3Ctext x='32' y='42' font-family='monospace' font-size='28' fill='%23e6b872' text-anchor='middle'%3E%24_%3C/text%3E%3C/svg%3E"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23f3efe6'/%3E%3Ctext x='32' y='49' font-family='Georgia,serif' font-size='48' fill='%23c63a1c' text-anchor='middle'%3E%C2%B6%3C/text%3E%3C/svg%3E"
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap"
     />
   </head>
   <body>
