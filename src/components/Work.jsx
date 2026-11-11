@@ -24,6 +24,29 @@ const projects = [
     status: { variant: 'shipped', label: 'Shipped' },
   },
   {
+    title: 'FM Standards Checker',
+    oneLiner: 'Audits a building model against FM loss-prevention standards.',
+    description:
+      'Drop in a BIM model (IFC) or JSON and it checks spaces, fire ratings, sprinkler coverage, roof ratings and transformers against a simplified encoding of FM Global Property Loss Prevention Data Sheets, surfacing issues for a fire protection engineer to review.',
+    // PLACEHOLDER: stack inferred from the live app (IFC/JSON import, in-browser checks).
+    // Paul: confirm the framework and any backend.
+    stack: ['IFC / BIM', 'JavaScript'],
+    link: 'https://fm-standards-checker.fly.dev/',
+    status: { variant: 'shipped', label: 'Shipped' },
+  },
+  {
+    title: 'StoryBook',
+    oneLiner: 'Old stories, performed aloud in the dark.',
+    description:
+      'Turns public-domain stories from Project Gutenberg into full audio performances: a distinct synthesized voice per character, over a soundscape and score built from scratch for each tale. Bring your own manuscript in the Studio, or just put the lights out and listen.',
+    // PLACEHOLDER: Kokoro-82M (TTS) and Web Audio are named on the site; the
+    // generation backend (Python?) is a guess. Paul: confirm the pipeline language.
+    stack: ['Kokoro-82M', 'Web Audio', 'Python'],
+    link: 'https://storybook-audio.fly.dev/',
+    linkLabel: 'listen',
+    status: { variant: 'live', label: 'Live · adding stories' },
+  },
+  {
     title: 'Freelance Web Development',
     oneLiner: 'A revenue-generating business, running since high school.',
     description:
