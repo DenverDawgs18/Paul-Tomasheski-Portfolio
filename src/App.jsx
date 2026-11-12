@@ -62,7 +62,7 @@ const SCENES = [
     ),
     facts: [
       ['Built with', 'Django'],
-      ['Status', 'Live, mid-refactor'],
+      ['Status', 'Live'],
     ],
     link: ['Open MailMind', 'https://mailmind.fly.dev/'],
   },
