@@ -1,0 +1,719 @@
+:root {
+  --ink: #090807;
+  --ivory: #f4eee2;
+  --dim: rgba(244, 238, 226, 0.62);
+  --faint: rgba(244, 238, 226, 0.34);
+  --rule: rgba(244, 238, 226, 0.14);
+  --accent: #ff5a2b;
+  --serif: 'Instrument Serif', Georgia, 'Times New Roman', serif;
+  --sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  --gutter: clamp(1.25rem, 5vw, 5rem);
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--ink);
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--ink);
+  color: var(--ivory);
+  font-family: var(--sans);
+  font-size: 1rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+/* ---------- the field ---------- */
+
+.field {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.gl .field {
+  opacity: 1;
+}
+
+main,
+.bar,
+.rail,
+.fig {
+  position: relative;
+  z-index: 1;
+}
+
+/* ---------- fixed chrome ---------- */
+
+.bar {
+  position: fixed;
+  inset: 0 0 auto 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem var(--gutter);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  z-index: 3;
+}
+
+.bar a {
+  text-decoration: none;
+  color: var(--dim);
+  transition: color 0.2s;
+}
+
+.bar a:hover {
+  color: var(--ivory);
+}
+
+.bar-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+}
+
+.dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 0 rgba(255, 90, 43, 0.6);
+  animation: pulse 2.4s ease-out infinite;
+}
+
+@keyframes pulse {
+  to {
+    box-shadow: 0 0 0 0.6rem rgba(255, 90, 43, 0);
+  }
+}
+
+.rail {
+  position: fixed;
+  right: calc(var(--gutter) * 0.5);
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  z-index: 3;
+}
+
+.rail a {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.42rem 0;
+  text-decoration: none;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ivory);
+}
+
+.rail-label {
+  opacity: 0;
+  transform: translateX(6px);
+  transition: opacity 0.2s, transform 0.2s;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.rail a:hover .rail-label,
+.rail a:focus-visible .rail-label {
+  opacity: 1;
+  transform: none;
+}
+
+.rail-tick {
+  width: 0.9rem;
+  height: 1px;
+  background: var(--faint);
+  transition: width 0.3s ease, background 0.3s;
+}
+
+.rail a:hover .rail-tick {
+  background: var(--ivory);
+}
+
+.rail a.is-active .rail-tick {
+  width: 2rem;
+  background: var(--accent);
+}
+
+.fig {
+  position: fixed;
+  left: var(--gutter);
+  right: var(--gutter);
+  bottom: 1.25rem;
+  margin: 0;
+  display: flex;
+  gap: 1.25rem;
+  align-items: baseline;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  color: var(--faint);
+  pointer-events: none;
+  z-index: 3;
+}
+
+.fig-n {
+  color: var(--accent);
+  flex: none;
+}
+
+.fig-text {
+  animation: fig-in 0.6s ease both;
+}
+
+@keyframes fig-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+}
+
+/* ---------- scenes ---------- */
+
+.scene {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  padding: 6rem var(--gutter);
+  margin-bottom: 35vh;
+}
+
+.scene:last-child {
+  margin-bottom: 0;
+}
+
+.scene-right {
+  justify-content: flex-end;
+}
+
+.scene-right .panel {
+  margin-right: clamp(0rem, 4vw, 4rem);
+}
+
+.scene-center {
+  justify-content: center;
+  text-align: center;
+}
+
+.panel {
+  width: min(100%, 27rem);
+}
+
+/* Text arrives with its figure. Without JS everything is simply there. */
+.js .panel > *,
+.js .hero-copy > *,
+.js .contact-copy > * {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.7s ease, transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.js .is-active .panel > *,
+.js .is-active .hero-copy > *,
+.js .is-active .contact-copy > * {
+  opacity: 1;
+  transform: none;
+}
+
+.js .is-active :is(.panel, .hero-copy, .contact-copy) > :nth-child(2) {
+  transition-delay: 0.07s;
+}
+.js .is-active :is(.panel, .hero-copy, .contact-copy) > :nth-child(3) {
+  transition-delay: 0.14s;
+}
+.js .is-active :is(.panel, .hero-copy, .contact-copy) > :nth-child(4) {
+  transition-delay: 0.21s;
+}
+.js .is-active :is(.panel, .hero-copy, .contact-copy) > :nth-child(5) {
+  transition-delay: 0.28s;
+}
+.js .is-active :is(.panel, .hero-copy, .contact-copy) > :nth-child(6) {
+  transition-delay: 0.35s;
+}
+
+.kicker {
+  margin: 0 0 1.1rem;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+h2 {
+  margin: 0;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(2.6rem, 5.4vw, 4.6rem);
+  line-height: 0.98;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+
+.lede {
+  margin: 0.9rem 0 0;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(1.3rem, 2vw, 1.65rem);
+  line-height: 1.25;
+  color: var(--dim);
+}
+
+.body {
+  margin-top: 1.4rem;
+  color: var(--dim);
+  font-size: 1rem;
+  text-wrap: pretty;
+}
+
+.body p {
+  margin: 0 0 0.9em;
+}
+
+.body p:last-child {
+  margin-bottom: 0;
+}
+
+.body cite {
+  font-family: var(--serif);
+  font-size: 1.25rem;
+  line-height: 1.3;
+  color: var(--ivory);
+}
+
+.body strong {
+  color: var(--ivory);
+  font-weight: 500;
+}
+
+.facts {
+  margin: 1.6rem 0 0;
+  border-top: 1px solid var(--rule);
+}
+
+.facts > div {
+  display: grid;
+  grid-template-columns: 9.5rem 1fr;
+  gap: 1rem;
+  padding: 0.65rem 0;
+  border-bottom: 1px solid var(--rule);
+  font-size: 0.82rem;
+}
+
+.facts dt {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--faint);
+  padding-top: 0.15em;
+}
+
+.facts dd {
+  margin: 0;
+  color: var(--ivory);
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 1.8rem;
+  padding: 0.8rem 1.25rem;
+  border: 1px solid var(--faint);
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.25s, color 0.25s, border-color 0.25s;
+}
+
+.cta:hover {
+  background: var(--ivory);
+  border-color: var(--ivory);
+  color: var(--ink);
+}
+
+.arrow {
+  display: inline-block;
+  transition: transform 0.25s ease;
+}
+
+a:hover > .arrow {
+  transform: translate(2px, -2px);
+}
+
+/* ---------- hero ---------- */
+
+.hero {
+  align-items: flex-end;
+  padding-bottom: 5.5rem;
+}
+
+/* With the field running, the name is drawn in points; the heading stays
+   for readers and machines that cannot see them. */
+.hero h1 {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  height: fit-content;
+  padding: 0 var(--gutter) 12vh;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(3.2rem, 11.5vw, 11rem);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+}
+
+.gl .hero h1 {
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  inset: auto;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.hero-copy {
+  width: min(100%, 36rem);
+}
+
+.hero-line {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(1.45rem, 2.5vw, 2.05rem);
+  line-height: 1.2;
+  text-wrap: balance;
+}
+
+.hero-note {
+  margin: 1rem auto 0;
+  max-width: 26rem;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.03em;
+  line-height: 1.7;
+  color: var(--faint);
+  text-wrap: balance;
+}
+
+.cue {
+  position: absolute;
+  left: 50%;
+  bottom: 3.1rem;
+  width: 1px;
+  height: 1.6rem;
+  background: linear-gradient(var(--ivory), transparent);
+  animation: cue 2.2s ease-in-out infinite;
+  transform-origin: top;
+}
+
+@keyframes cue {
+  0% {
+    transform: scaleY(0);
+    opacity: 0;
+  }
+  40% {
+    transform: scaleY(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scaleY(1) translateY(1rem);
+    opacity: 0;
+  }
+}
+
+/* ---------- contact ---------- */
+
+.contact {
+  align-items: flex-end;
+  padding-bottom: 7.5rem;
+}
+
+.contact-copy {
+  width: min(100%, 36rem);
+}
+
+/* "hello." is drawn in points above; keep the heading for everyone else. */
+.gl .contact h2 {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+
+.contact .body {
+  margin-top: 0;
+}
+
+.contact .body a {
+  color: var(--ivory);
+  text-underline-offset: 0.2em;
+  text-decoration-color: var(--faint);
+}
+
+.mail {
+  margin: 1.6rem 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.6rem 1rem;
+}
+
+.mail a {
+  font-family: var(--serif);
+  font-size: clamp(1.7rem, 4.4vw, 3rem);
+  line-height: 1.1;
+  text-decoration: none;
+  background: linear-gradient(var(--accent), var(--accent)) 0 100% / 100% 1px no-repeat;
+  transition: background-size 0.3s ease, color 0.3s;
+  overflow-wrap: anywhere;
+}
+
+.mail a:hover {
+  color: var(--ink);
+  background-size: 100% 100%;
+}
+
+.copy {
+  font: inherit;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--dim);
+  background: none;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.copy:hover {
+  color: var(--ivory);
+  border-color: var(--faint);
+}
+
+.links {
+  margin: 1.2rem 0 0;
+  display: flex;
+  justify-content: center;
+  gap: 1.75rem;
+  font-size: 0.92rem;
+}
+
+.links a {
+  display: inline-flex;
+  gap: 0.4rem;
+  text-decoration: none;
+  color: var(--dim);
+  transition: color 0.2s;
+}
+
+.links a:hover {
+  color: var(--ivory);
+}
+
+.colophon {
+  position: absolute;
+  left: var(--gutter);
+  right: var(--gutter);
+  bottom: 3.2rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.04em;
+  color: var(--faint);
+  text-align: left;
+}
+
+.colophon a {
+  text-underline-offset: 0.2em;
+}
+
+.colophon a:hover {
+  color: var(--ivory);
+}
+
+/* ---------- small screens: figure above, words below ---------- */
+
+@media (max-aspect-ratio: 9/10), (max-width: 700px) {
+  .scene {
+    align-items: flex-end;
+    padding: 5rem var(--gutter) 4.5rem;
+    margin-bottom: 30vh;
+  }
+
+  .scene-left,
+  .scene-right {
+    justify-content: flex-start;
+  }
+
+  .scene-right .panel {
+    margin-right: 0;
+  }
+
+  .panel {
+    width: min(100%, 30rem);
+    padding-right: 1.5rem;
+  }
+
+  h2 {
+    font-size: clamp(2.2rem, 10vw, 3.2rem);
+  }
+
+  .lede {
+    margin-top: 0.6rem;
+  }
+
+  .body {
+    margin-top: 1rem;
+    font-size: 0.95rem;
+  }
+
+  .facts {
+    margin-top: 1.1rem;
+  }
+
+  .facts > div {
+    grid-template-columns: 7.5rem 1fr;
+    padding: 0.5rem 0;
+  }
+
+  .cta {
+    margin-top: 1.3rem;
+  }
+
+  .rail-label {
+    display: none;
+  }
+
+  .rail {
+    right: 0.6rem;
+  }
+
+  .rail a {
+    padding: 0.35rem 0;
+  }
+
+  .rail-tick {
+    width: 0.5rem;
+  }
+
+  .rail a.is-active .rail-tick {
+    width: 1rem;
+  }
+
+  .fig-text {
+    display: none;
+  }
+
+  .hero {
+    padding-bottom: 6rem;
+  }
+
+  .contact {
+    padding-bottom: 8rem;
+  }
+
+  .colophon {
+    bottom: 3rem;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+@media print {
+  .field,
+  .rail,
+  .fig,
+  .cue,
+  .bar-status {
+    display: none;
+  }
+
+  html,
+  body {
+    background: #fff;
+    color: #000;
+  }
+
+  .scene {
+    min-height: 0;
+    margin: 0 0 2rem;
+    padding: 0;
+    display: block;
+    text-align: left;
+  }
+
+  .js .panel > *,
+  .js .hero-copy > *,
+  .js .contact-copy > * {
+    opacity: 1;
+    transform: none;
+  }
+}
